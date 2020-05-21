@@ -16,6 +16,12 @@ abstract contract ModuleAuth is IModuleAuth, ModuleERC165, SignatureValidator, I
   uint256 private constant FLAG_SIGNATURE = 0;
   uint256 private constant FLAG_ADDRESS = 1;
 
+  enum SigPartType {
+    signature,
+    addr,
+    invalid
+  }
+
   bytes4 private constant SELECTOR_ERC1271_BYTES_BYTES = 0x20c13b0b;
   bytes4 private constant SELECTOR_ERC1271_BYTES32_BYTES = 0x1626ba7e;
 
@@ -67,10 +73,12 @@ abstract contract ModuleAuth is IModuleAuth, ModuleERC165, SignatureValidator, I
       uint256 flag; uint256 addrWeight; address addr;
       (flag, addrWeight, rindex) = _signature.readUint8Uint8(rindex);
 
-      if (flag == FLAG_ADDRESS) {
+      SigPartType t = SigPartType(flag);
+
+      if (t == SigPartType.addr) {
         // Read plain address
         (addr, rindex) = _signature.readAddress(rindex);
-      } else if (flag == FLAG_SIGNATURE) {
+      } else if (t == SigPartType.signature) {
         // Read single signature and recover signer
         bytes memory signature;
         (signature, rindex) = _signature.readBytes66(rindex);
