@@ -1,0 +1,9 @@
+analyze:
+    async: false
+    create-group: true
+    solc: 0.6.8
+    remappings:
+    targets:
+        - contracts/Factory.sol
+        - contracts/modules/MainModule.sol
+        - contracts/modules/MainModuleUpgradable.sol
