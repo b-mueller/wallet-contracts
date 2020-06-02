@@ -743,6 +743,7 @@ contract MythXVerifySignatureValidation01 is ModuleAuthFixed {
   */
 
 
+  /* Control function: The analyzer should be able to compute a violation here.
   function shouldPassSignatureCheck(
     bytes calldata _signature
   ) external {
@@ -751,6 +752,7 @@ contract MythXVerifySignatureValidation01 is ModuleAuthFixed {
         emit AssertionFailed("Expected result from analyzer: 0x00010001aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0.");
     }
   }
+  */
 
   function shouldNotPassSignatureCheck(
     bytes calldata _signature

@@ -748,4 +748,38 @@ contract MythXVerifySignatureValidation02 is ModuleAuthFixed {
     }
   }
 
+  /* Control function: The analyzer should be able to compute a violation here.
+
+  function shouldPassSignatureCheck(
+    bytes memory input
+  ) public {
+     (
+      uint16 threshold,
+      uint256 rindex
+    ) = input.readFirstUint16();
+
+    require(threshold == 1);
+
+    uint256 totalWeight;
+
+    while (rindex < input.length) {
+      uint256 flag; uint256 addrWeight; address addr;
+      (flag, addrWeight, rindex) = input.readUint8Uint8(rindex);
+
+      if (flag == 1) {
+        (addr, rindex) = input.readAddress(rindex);
+      } else if (flag == 0) {
+        bytes memory signature;
+        (signature, rindex) = input.readBytes66(rindex);
+
+        totalWeight += addrWeight;
+      }
+    }
+
+    if (_signatureValidation(HASH_TO_SIGN, input)) {
+        emit AssertionFailed("This should pass");
+    }
+  }
+  */
+
 }
