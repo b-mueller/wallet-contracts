@@ -1279,8 +1279,8 @@ contract MythXVerifySimpleProperties is MainModule {
        emit AssertionFailed("[P6a] Nonce in specified space must always increase after successful execution.");
     }
 
-    if (!(new_nonce != old_nonce + 1)) {
-       emit AssertionFailed("[P6b] Nonce in specified space must alwyas increase by exactly 1.");
+    if (!(new_nonce == old_nonce + 1)) {
+       emit AssertionFailed("[P6b] Nonce in specified space must always increase by exactly 1.");
     }
 
      if (!_signatureValidation(_hashData(abi.encode(_nonce, _txs)), _signature)) {
