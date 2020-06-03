@@ -1,9 +1,10 @@
 analyze:
-    async: false
+    async: true
+    mode: deep
     create-group: true
     solc: 0.6.8
-    remappings:
+    check-properties: true
     targets:
-        - contracts/Factory.sol
-        - contracts/modules/MainModule.sol
-        - contracts/modules/MainModuleUpgradable.sol
+        - mythx/MythXVerifySimpleProperties.sol:MythXVerifySimpleProperties
+        - mythx/MythXVerifySignatureValidation01.sol:MythXVerifySignatureValidation01
+        - mythx/MythXVerifySignatureValidation02.sol:MythXVerifySignatureValidation02

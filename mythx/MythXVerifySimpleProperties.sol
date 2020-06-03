@@ -1269,12 +1269,18 @@ contract MythXVerifySimpleProperties is MainModule {
 
     uint256 new_nonce = readNonce(space);
 
+    // Postconditions on success
+
     if (!(_provided_nonce == old_nonce)) {
        emit AssertionFailed("[P5] execute must revert if provided nonce is not equal to current nonce in the state.");
     }
 
     if (!(new_nonce > old_nonce)) {
-       emit AssertionFailed("[P6] Nonce in specified space must increase after successful execution.");
+       emit AssertionFailed("[P6a] Nonce in specified space must always increase after successful execution.");
+    }
+
+    if (!(new_nonce != old_nonce + 1)) {
+       emit AssertionFailed("[P6b] Nonce in specified space must alwyas increase by exactly 1.");
     }
 
      if (!_signatureValidation(_hashData(abi.encode(_nonce, _txs)), _signature)) {
